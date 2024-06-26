@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;600&display=swap');
+
+:root {
+  --highlight-light: #d3d3d3;
+  --highlight-dark: #a9a9a9;
+  --time: #545454;
+  --predefined: #000000;
+  --selected: #126da6;
+  --selected-light: #9bc4dd;
+  --invalid-light: #fd8989;
+  --invalid-dark: #980404;
+
+  /*
+  --btnHintLight: #fffaa0;
+  --btnHintDark: #daa520;
+  */
+  --btnHintLight: #90EE90;
+  --btnHintDark: #008000;
+  --btnNewGameLight: #87c7ff;
+  --btnNewGameDark: #0a4e8e;
+  --btnInactiveLight: #a9a9a9;
+  --btnInactiveDark: #545454;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Mukta', sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game__info {
+  width: 450px;
+  margin-left: 0px;
+  margin-bottom: 5px;
+  font-size: large;
+  /* Vertical */
+}
+
+.game__info > svg {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.game__time {
+  position: relative;
+  top: 2px;
+  color: var(--time);
+}
+
+.game__controls {
+  margin-top: 10px;
+}
+
+.game__btn {
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  width: 150px;
+  text-decoration: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  cursor: pointer;
+}
+
+.game__btn > svg {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.game__btn > span {
+  vertical-align: middle;
+}
+
+.game__btn:active {
+  transform: scale(0.95);
+  transition: all 0.1s;
+}
+
+.game__controls > :not(.game__btn:active) {
+  transform: scale(1);
+  transition: all 0.1s;
+}
+
+.game__btn.btnHint {
+  background-color: var(--btnHintLight);
+  color: var(--btnHintDark);
+}
+
+.game__btn.btnHint > svg {
+  color: var(--btnHintDark);
+  transform: scale(1.3) translateY(-1px);
+  margin-right: 7px;
+  vertical-align: middle;
+}
+
+.game__btn.btnNewGame {
+  margin-right: 10px;
+  background-color: var(--btnNewGameLight);
+  color: var(--btnNewGameDark);
+}
+
+.game__btn.btnNewGame > svg {
+  color: var(--btnNewGameDark);
+  vertical-align: middle;
+}
+
+.game__btn.btnInactive {
+  color: var(--btnInactiveDark);
+  background-color: var(--btnInactiveLight);
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+.game__btn.btnInactive > svg {
+  color: var(--btnInactiveDark);
+  vertical-align: middle;
+}
+
+.overlay {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #969696cc;
+  backdrop-filter: blur(25px);
+  border-radius: 20px;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.1s linear;
+}
+
+.overlay.overlay__hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlay__inner {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.overlay__content {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner {
+  width: 75px;
+  height: 75px;
+  display: inline-block;
+  border-width: 7px;
+  border-color: rgba(255, 255, 255, 0.2);
+  border-top-color: #fff;
+  animation: spin 2s infinite linear;
+  border-radius: 100%;
+  border-style: solid;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.sudoku__grid {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 20px;
+}
+
+.sudoku__cgrid {
+  position: relative;
+}
+
+.sudoku__field {
+  border: 2px solid black;
+  border-style: none solid solid none;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sudoku__field:focus-within {
+  overflow: visible;
+}
+
+.sudoku__row:first-child .sudoku__field:first-child,
+.sudoku__row:first-child .sudoku__field:first-child > input:focus
+ {
+  border-top-left-radius: 20px;
+}
+
+.sudoku__row:first-child .sudoku__field:last-child,
+.sudoku__row:first-child .sudoku__field:last-child > input:focus
+{
+  border-top-right-radius: 20px;
+}
+
+.sudoku__row:last-child .sudoku__field:first-child,
+.sudoku__row:last-child .sudoku__field:first-child > input:focus
+{
+  border-bottom-left-radius: 20px;
+}
+
+.sudoku__row:last-child .sudoku__field:last-child,
+.sudoku__row:last-child .sudoku__field:last-child > input:focus
+{
+  border-bottom-right-radius: 20px;
+}
+
+.sudoku__row .sudoku__field:first-child {
+  border-left: 4px solid;
+  border-left-color: black;
+}
+
+.sudoku__row .sudoku__field:nth-child(3n) {
+  border-right: 4px solid;
+  border-right-color: black;
+}
+
+.sudoku__row:first-child .sudoku__field {
+  border-top: 4px solid;
+  border-top-color: black;
+}
+
+.sudoku__row:nth-child(3n) .sudoku__field {
+  border-bottom: 4px solid;
+  border-bottom-color: black;
+}
+
+
+.sudoku__field > input {
+  box-sizing: border-box;
+  border-style: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 0px;
+  transition: all .1s ease-out;
+  color: var(--selected);
+  caret-color: black;
+  cursor: default;
+
+}
+
+.sudoku__field:not(.invalid) > input:focus,
+.sudoku__field.invalid > input:focus
+{
+  transform: scale(1.0);
+  color: var(--selected);
+  outline-style: solid;
+  outline-width: 5px;
+  outline-color: var(--selected);
+  background-image: none;
+  border-radius: 8px;
+  background-color: var(--selected-light);
+}
+
+.sudoku__field.invalid > input:focus {
+  outline-color: var(--invalid-dark);
+  color: var(--invalid-dark);
+  background-color: var(--invalid-light);
+}
+
+.sudoku__field.predefined > input,
+.sudoku__field.predefined > input:focus {
+  color: var(--predefined);
+}
+
+.sudoku__field.predefined > input:focus {
+  outline-color: rgb(77, 77, 77);
+  background-color: var(--highlight-light);
+}
+
+.sudoku__field.invalid > input {
+  color: var(--invalid-dark);
+  background-image: radial-gradient(circle at center, var(--invalid-light) 58%, transparent 60%);
+}
+
+.sudoku__field.highlight, .sudoku__field.highlight > input {
+  background-color: var(--highlight-light);
+}
