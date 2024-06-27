@@ -1,5 +1,6 @@
 # First stage
 FROM node:18-alpine as builder
+LABEL org.opencontainers.image.source="https://github.com/ptrk25/sudoku-backend"
 WORKDIR /app
 COPY . .
 RUN npm install && \
