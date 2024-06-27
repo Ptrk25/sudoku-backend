@@ -1,5 +1,10 @@
 name: Build Image and deploy to GHCR
-on: [push]
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   push-store-image:
