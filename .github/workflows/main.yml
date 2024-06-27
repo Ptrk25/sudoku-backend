@@ -18,4 +18,6 @@ jobs:
       - name: 'Build Image'
         run: |
           podman build . -t ghcr.io/ptrk25/${{ github.event.repository.name }}:latest
+      - name: 'Push to GHCR'
+        run: |
           podman push ghcr.io/ptrk25/${{ github.event.repository.name }}:latest
