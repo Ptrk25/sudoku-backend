@@ -17,5 +17,5 @@ jobs:
 
       - name: 'Build Image'
         run: |
-          podman build . -t ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:latest
-          podman push ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:latest
+          podman build . -t ghcr.io/ptrk25/${{ github.event.repository.name }}:latest
+          podman push ghcr.io/ptrk25/${{ github.event.repository.name }}:latest
