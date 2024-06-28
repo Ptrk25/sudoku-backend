@@ -20,9 +20,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: 'Read package.json'
+        uses: rexdefuror/read-package-json@v1.0.5
+        
       - name: 'Build Image'
         run: |
-          podman build . -t ghcr.io/ptrk25/${{ github.event.repository.name }}:latest
+          podman build . -t ghcr.io/ptrk25/${{ github.event.repository.name }}:${{ env.PACKAGE_VERSION }}
+          
       - name: 'Push to GHCR'
         run: |
-          podman push ghcr.io/ptrk25/${{ github.event.repository.name }}:latest
+          podman push ghcr.io/ptrk25/${{ github.event.repository.name }}:${{ env.PACKAGE_VERSION }}
