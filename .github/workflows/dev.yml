@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  push-store-image:
+  build-image:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Github Action'
