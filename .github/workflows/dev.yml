@@ -3,6 +3,7 @@ name: Dev Workflow - Test Build
 on:
   pull_request:
     branches: [ "master" ]
+  workflow_dispatch:
 
 jobs:
   push-store-image:
